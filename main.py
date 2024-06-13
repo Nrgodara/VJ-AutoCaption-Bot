@@ -34,6 +34,8 @@ replacement_dict = {
     "जय श्री राम 🚩🚩": "Coaching ➤ Kalam Academy Sikar",
     "Unrestricted by Team SPY": "",
     "MR Joker": "",
+    "@MK_rj49 🚩": "[𝑴𝑨𝑯𝑰®🇮🇳](https://t.me/+TQfNhTbrVC04NWNl)",
+    "Downloaded by:": "𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 ➤",
     
     # Add more replacements as needed
 }
