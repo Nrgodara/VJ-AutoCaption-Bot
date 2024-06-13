@@ -32,6 +32,9 @@ replacement_dict = {
     "@demon_0214": "[𝑴𝑨𝑯𝑰®🇮🇳](https://t.me/+TQfNhTbrVC04NWNl)",
     "Extracted by:": "𝐄𝐱𝐭𝐫𝐚𝐜𝐭𝐞𝐝 𝐁𝐲 ➤",
     "जय श्री राम 🚩🚩": "Coaching ➤ Kalam Academy Sikar",
+    "Unrestricted by Team SPY": "",
+    "MR Joker": "",
+    
     # Add more replacements as needed
 }
 
@@ -43,15 +46,9 @@ words_to_delete = [
 ]
 
 # Function to replace and delete words in a caption
-def modify_caption(caption, replacements, deletions):
-    # Replace words
+def replace_words(caption, replacements):
     for old_word, new_word in replacements.items():
         caption = caption.replace(old_word, new_word)
-    # Delete specified words
-    for word in deletions:
-        caption = caption.replace(word, "")
-    # Remove extra spaces that might be left after deletions
-    caption = ' '.join(caption.split())
     return caption
 
 # Start Command Handler
@@ -76,9 +73,9 @@ def edit_caption(bot, update: pyrogram.types.Message):
     
     # Only proceed if there is a caption
     if update.caption:
-        # Modify the caption (replace and delete words)
-        new_caption = modify_caption(update.caption, replacement_dict, words_to_delete)
-        new_caption += "\n[𝔼𝕏ℙ𝔼ℂ𝕋 𝕋ℍ𝔼 𝕌ℕ𝔼𝕏ℙ𝔼ℂ𝕋𝔼𝔻 🫰❤️‍🔥](https://t.me/+TQfNhTbrVC04NWNl)\n•┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈•\n       **@Free_Batches_bot** "
+        # Replace words in the caption
+        new_caption = replace_words(update.caption, replacement_dict)
+        new_caption += "\n𝔼𝕏ℙ𝔼ℂ𝕋 𝕋ℍ𝔼 𝕌ℕ𝔼𝕏ℙ𝔼ℂ𝕋𝔼𝔻 🫰❤️‍🔥\n•┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈•\n       **@Free_Batches_bot** "
         
         try:
             try:
