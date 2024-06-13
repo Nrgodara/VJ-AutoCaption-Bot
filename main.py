@@ -12,6 +12,21 @@ except Exception as bot_token: print(f"⚠️ Bot Token Invalid {bot_token}")
 AutoCaptionBotV1 = pyrogram.Client(
     name="AutoCaptionBotV1", api_id=app_id, api_hash=api_hash, bot_token=bot_token)
 
+start_message = """
+<b>👋Hello {}</b>
+<b>I am an AutoCaption bot</b>
+<b>All you have to do is add me to your channel and I will show you my power</b>
+<b>@VJ_Botz</b>"""
+
+about_message = """
+<b>• Name : <a href=https://t.me/VJ_Botz>VJ AutoCaption</a></b>
+<b>• Developer : <a href=https://t.me/VJ_Botz>[VJ UPDATES]</a></b>
+<b>• Language : Python3</b>
+<b>• Library : Pyrogram v{version}</b>
+<b>• Updates : <a href=https://t.me/VJ_Botz>Click Here</a></b>
+<b>• Source Code : <a href=https://github.com/VJBots/VJ-AutoCaption-Bot>Click Here</a></b>"""
+
+
 # Replacement Mapping (Define your replacements here)
 replacement_dict = {
     "@demon_0214": "[𝑴𝑨𝑯𝑰®🇮🇳](https://t.me/+TQfNhTbrVC04NWNl)",
@@ -20,10 +35,23 @@ replacement_dict = {
     # Add more replacements as needed
 }
 
-# Function to replace words in a caption
-def replace_words(caption, replacements):
+# List of words to delete from the caption
+words_to_delete = [
+    "Unrestricted by Team SPY",
+    "MR Joker",
+    # Add more words to delete as needed
+]
+
+# Function to replace and delete words in a caption
+def modify_caption(caption, replacements, deletions):
+    # Replace words
     for old_word, new_word in replacements.items():
         caption = caption.replace(old_word, new_word)
+    # Delete specified words
+    for word in deletions:
+        caption = caption.replace(word, "")
+    # Remove extra spaces that might be left after deletions
+    caption = ' '.join(caption.split())
     return caption
 
 # Start Command Handler
@@ -48,8 +76,9 @@ def edit_caption(bot, update: pyrogram.types.Message):
     
     # Only proceed if there is a caption
     if update.caption:
-        # Replace words in the caption
-        new_caption = replace_words(update.caption, replacement_dict)
+        # Modify the caption (replace and delete words)
+        new_caption = modify_caption(update.caption, replacement_dict, words_to_delete)
+        new_caption += "\n[𝔼𝕏ℙ𝔼ℂ𝕋 𝕋ℍ𝔼 𝕌ℕ𝔼𝕏ℙ𝔼ℂ𝕋𝔼𝔻 🫰❤️‍🔥](https://t.me/+TQfNhTbrVC04NWNl)\n•┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈•\n       **@Free_Batches_bot** "
         
         try:
             try:
@@ -81,7 +110,7 @@ def get_file_details(update: pyrogram.types.Message):
 def start_buttons(bot, update):
     bot = bot.get_me()
     buttons = [[
-        pyrogram.types.InlineKeyboardButton("Updates", url="t.me/MAHI_BOTZ"),
+        pyrogram.types.InlineKeyboardButton("Updates", url="t.me/mahi_Botz"),
         pyrogram.types.InlineKeyboardButton("About 🤠", callback_data="about")
     ], [
         pyrogram.types.InlineKeyboardButton("➕️ Add To Your Channel ➕️", url=f"http://t.me/{bot.username}?startchannel=true")
@@ -95,8 +124,11 @@ def about_buttons(bot, update):
     return pyrogram.types.InlineKeyboardMarkup(buttons)
 
 # Start the Bot
-print("Telegram AutoCaption V7 Bot Start")
-print("Bot Created By MAHI®")
+print("Telegram AutoCaption V1 Bot Start")
+print("Bot Created By https://t.me/Mahi_botz")
 
 AutoCaptionBotV1.run()
 
+# Don't Remove Credit @VJ_Botz
+# Subscribe YouTube Channel For Amazing Bot @Tech_VJ
+# Ask Doubt on telegram @KingVJ01
